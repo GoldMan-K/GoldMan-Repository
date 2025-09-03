@@ -43,17 +43,17 @@ jobs:
       - name: Make Gradle Wrapper Executable
         run: chmod +x ./gradlew
 
-      # 5. 프론트엔드 npm 설치
+      # 5. 프론트엔드 npm 설치 및 권한 수정
       - name: Install frontend dependencies
         working-directory: ./frontend
         run: |
           npm install
-          chmod +x ./node_modules/.bin/vue-cli-service
+          chmod -R 755 ./node_modules/.bin
 
-      # 6. 프론트엔드 빌드
+      # 6. 프론트엔드 빌드 (npx 사용으로 권한 문제 해결)
       - name: Build frontend
         working-directory: ./frontend
-        run: npm run build
+        run: npx vue-cli-service build
 
       # 7. Docker Buildx 설치
       - name: Set up Docker Buildx
