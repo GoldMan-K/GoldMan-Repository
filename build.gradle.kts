@@ -22,8 +22,9 @@ task<Exec>("installNpmDependencies") {
 task<Exec>("buildFrontend") {
     dependsOn("installNpmDependencies")
     workingDir("src/frontend")
-    commandLine(npmCommand, "run", "build")
+    commandLine("npx", "vue-cli-service", "build")
 }
+
 
 tasks.processResources {
     dependsOn("buildFrontend")
