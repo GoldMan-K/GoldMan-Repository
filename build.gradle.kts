@@ -1,7 +1,12 @@
 plugins {
+    id("application")
     id("org.springframework.boot") version "3.2.6"
     id("io.spring.dependency-management") version "1.1.5"
     id("java")
+}
+
+springBoot {
+    mainClass = "com.community.CommunityApplication"
 }
 
 // Node.js와 npm 태스크 설정
@@ -36,18 +41,27 @@ dependencies {
     // JUnit BOM 및 JUnit Jupiter
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+
     // Lombok 의존성
     implementation("org.projectlombok:lombok:1.18.30")
     annotationProcessor("org.projectlombok:lombok:1.18.30")
-    // Spring Data JPA 의존성 추가
+
+    // Spring Boot 기본 의존성
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-web") // 웹 관련 설정(필요 시)
-    //mysql-connector
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
+    // Spring Security - 단순화된 의존성 설정
+    implementation("org.springframework.boot:spring-boot-starter-security")
+
+    // MySQL 드라이버
     runtimeOnly("com.mysql:mysql-connector-j")
+
+    // build.gradle 또는 pom.xml에 다음 의존성 추가
+    implementation ("org.springframework.boot:spring-boot-starter-actuator")
 }
 
 tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
-    mainClass.set("com.community.backend.home.HomeController")
+    mainClass.set("com.community.CommunityApplication")
 }
 
 java {

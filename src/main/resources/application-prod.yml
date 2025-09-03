@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:mysql://mysql-server:3306/community?useSSL=false&characterEncoding=UTF-8
+    username: ${DB_USERNAME:admin}
+    password: ${DB_PASSWORD:admin111!@#}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false  # 운영환경에서는 false 권장
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: false  # 운영환경에서는 false 권장
+
+logging:
+  level:
+    org.hibernate.SQL: WARN  # 운영환경에서는 WARN 또는 ERROR 권장
+
+server:
+  port: 7777
