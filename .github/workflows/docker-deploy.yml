@@ -18,6 +18,17 @@ jobs:
       - name: Make Gradle Wrapper executable
         run: chmod +x ./gradlew
 
+      # Node.js 설치
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # 프로젝트에서 요구하는 버전
+
+      - name: Install dependencies
+        run: |
+          npm install
+          chmod +x ./node_modules/.bin/vue-cli-service
+
       # 4. Gradle 빌드
       - name: Build with Gradle
         run: ./gradlew clean build -x test
