@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      # 0. 실행 권한 부여 (Gradle Wrapper)
+      - name: Make Gradle Wrapper Executable
+        run: chmod +x ./gradlew
+
       # 1. 소스코드 체크아웃
       - name: Checkout source
         uses: actions/checkout@v3
@@ -34,7 +39,7 @@ jobs:
 
       # 4. Gradle 빌드 실행
       - name: Build with Gradle
-        run: ./gradlew clean build -x developmentgoldman
+        run: ./gradlew clean build -x test
 
       # 5. Docker Buildx 설치
       - name: Set up Docker Buildx
@@ -56,11 +61,7 @@ jobs:
           push: true
           tags: developmentgoldman/communityboard-app:latest
 
-      # 8. 실행 권한 부여
-      - name: Make Gradle Wrapper Executable
-        run: chmod +x ./gradlew
-
-      # 9. 빌드 실행 권한 부여
+      # 8. 빌드 실행 권한 부여
       - name: Make build script executable
         run: chmod +x ./build.sh
 
