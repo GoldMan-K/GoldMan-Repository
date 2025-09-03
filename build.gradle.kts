@@ -19,11 +19,21 @@ task<Exec>("installNpmDependencies") {
     commandLine(npmCommand, "install")
 }
 
-task<Exec>("buildFrontend") {
+// 1. 권한 수정 태스크
+val fixFrontendPermissions = tasks.register<Exec>("fixFrontendPermissions") {
+    workingDir = file("src/frontend")   // <-- 이렇게 수정
+    commandLine("chmod", "-R", "+x", "node_modules/.bin")
+}
+
+// 2. buildFrontend 태스크 수정
+tasks.named<Exec>("buildFrontend") {
     dependsOn("installNpmDependencies")
-    workingDir("src/frontend")
+    dependsOn(fixFrontendPermissions)
+    workingDir = file("src/frontend")   // <-- 이렇게 수정
     commandLine("npx", "vue-cli-service", "build")
 }
+
+
 
 
 tasks.processResources {
