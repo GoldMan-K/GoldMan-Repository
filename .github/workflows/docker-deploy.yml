@@ -43,6 +43,12 @@ jobs:
       - name: Make Gradle Wrapper Executable
         run: chmod +x ./gradlew
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # 프로젝트에 맞는 Node 버전
+
+
       # 5. 프론트엔드 npm 설치 및 권한 수정
       - name: Install frontend dependencies
         working-directory: ./frontend
