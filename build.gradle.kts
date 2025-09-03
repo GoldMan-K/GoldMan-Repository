@@ -14,11 +14,6 @@ springBoot {
 val isWindows = System.getProperty("os.name").toLowerCase().contains("win")
 val npmCommand = if (isWindows) "npm.cmd" else "npm"
 
-task<Exec>("installNpmDependencies") {
-    workingDir("src/frontend")
-    commandLine(npmCommand, "install")
-}
-
 val installNpmDependencies = tasks.register<Exec>("installNpmDependencies") {
     workingDir = file("src/frontend") // package.json 위치
     commandLine("npm", "install")
