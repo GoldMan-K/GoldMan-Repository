@@ -25,7 +25,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./community_was
-          file: ./community_was/Dockerfile
+          context: .
+          file: ./Dockerfile
           push: true
           tags: developmentgoldman/communityboard-app:latest
