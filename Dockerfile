@@ -5,7 +5,8 @@ FROM openjdk:21-jdk-slim as builder
 WORKDIR /app
 
 # JAR 파일 복사
-COPY app/communityboard-1.0-SNAPSHOT.jar app.jar
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} app.jar
 
 # 실행 단계
 FROM openjdk:21-jdk-slim
