@@ -52,8 +52,7 @@ jobs:
 
       # 6. 프론트엔드 빌드 (npx 사용으로 권한 문제 해결)
       - name: Build frontend
-        working-directory: ./frontend
-        run: npx vue-cli-service build
+        run: ./gradlew buildFrontend
 
       # 7. Docker Buildx 설치
       - name: Set up Docker Buildx

@@ -19,19 +19,24 @@ task<Exec>("installNpmDependencies") {
     commandLine(npmCommand, "install")
 }
 
-// 1. 권한 수정 태스크
+// build.gradle.kts (루트 또는 frontend 서브프로젝트)
+val buildFrontend = tasks.register<Exec>("buildFrontend") {
+    workingDir = file("src/frontend")
+    commandLine("npx", "vue-cli-service", "build")
+}
+
+// 권한 문제 해결용
 val fixFrontendPermissions = tasks.register<Exec>("fixFrontendPermissions") {
-    workingDir = file("src/frontend")   // <-- 이렇게 수정
+    workingDir = file("src/frontend")
     commandLine("chmod", "-R", "+x", "node_modules/.bin")
 }
 
-// 2. buildFrontend 태스크 수정
-tasks.named<Exec>("buildFrontend") {
+// 빌드 순서 설정
+buildFrontend {
     dependsOn("installNpmDependencies")
     dependsOn(fixFrontendPermissions)
-    workingDir = file("src/frontend")   // <-- 이렇게 수정
-    commandLine("npx", "vue-cli-service", "build")
 }
+
 
 
 
