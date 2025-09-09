@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment {
+public class Comment {  // JPA 엔티티 클래스 선언
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
