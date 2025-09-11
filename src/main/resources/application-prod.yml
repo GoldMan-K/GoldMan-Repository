@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://mysql-server:3306/community?useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
-    username: ${DB_USERNAME:admin}
-    password: ${DB_PASSWORD:admin111!@#}
+    url: jdbc:mysql://proxysql:6033/community?useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME:appuser}
+    password: ${DB_PASSWORD:apppass}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
